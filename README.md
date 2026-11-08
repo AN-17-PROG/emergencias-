@@ -1,4 +1,4 @@
-\# Sistema de Gestión de Emergencias Médicas (concurrencia en Java)
+Sistema de Gestión de Emergencias Médicas (concurrencia en Java)
 
 
 
@@ -10,25 +10,25 @@ estado en tiempo real.
 
 
 
-\## Requisitos
+ Requisitos
 
-\- JDK 11 o superior
+- JDK 11 o superior
 
-\- NetBeans (opcional)
-
-
-
-\## Cómo ejecutar
+- NetBeans (opcional)
 
 
 
-\*\*Con NetBeans:\*\* abrir el proyecto `emergencias`, clic derecho sobre `Main.java`
-
-y elegir \*Run File\* (Shift + F6).
+Cómo ejecutar
 
 
 
-\*\*Con la línea de comandos\*\* (desde la carpeta del proyecto):
+Con NetBeans: abrir el proyecto `emergencias`, clic derecho sobre `Main.java`
+
+y elegir Run File (Shift + F6).
+
+
+
+Con la línea de comandos (desde la carpeta del proyecto):
 
 
 
@@ -62,7 +62,7 @@ java -cp out Main
 
 
 
-\## Configuración
+Configuración
 
 En `Main.java` se puede cambiar: `numOperadores`, `numDespachadores`,
 
@@ -70,39 +70,38 @@ En `Main.java` se puede cambiar: `numOperadores`, `numDespachadores`,
 
 
 
-\## Estructura
+ Estructura
+- `modelo`: Emergencia, Gravedad, Estado, Recurso, Asignacion
 
-\- `modelo`: Emergencia, Gravedad, Estado, Recurso, Asignacion
+- `cola`: ColaEmergencias (prioridad con envejecimiento, lock + condition)
 
-\- `cola`: ColaEmergencias (prioridad con envejecimiento, lock + condition)
+- `recursos`: GestorRecursos (reserva todo-o-nada con un solo lock)
 
-\- `recursos`: GestorRecursos (reserva todo-o-nada con un solo lock)
+- `hilos`: Operador, Despachador, Averias
 
-\- `hilos`: Operador, Despachador, Averias
+- `comunicacion`: BusEventos (patrón Observer asíncrono), Evento, Observador
 
-\- `comunicacion`: BusEventos (patrón Observer asíncrono), Evento, Observador
+- `monitor`: Monitor, Estadisticas, RegistroConsola
 
-\- `monitor`: Monitor, Estadisticas, RegistroConsola
-
-\- `hospital`: Hospital (observador)
-
-
-
-\## Mecanismos de concurrencia
-
-\- ExecutorService (pool de hilos)
-
-\- ReentrantLock con Condition (cola y gestor de recursos)
-
-\- Variables atómicas (id de emergencias y estadísticas)
-
-\- Reserva todo-o-nada y backoff aleatorio (evitan deadlock y livelock)
-
-\- Aging: la prioridad sube con el tiempo de espera (evita starvation)
+- `hospital`: Hospital (observador)
 
 
 
-\## Integrantes y contribución
+ Mecanismos de concurrencia
 
-\- (jose Daniel Novoa hernandez): (una sola persona)
+- ExecutorService (pool de hilos)
+
+- ReentrantLock con Condition (cola y gestor de recursos)
+
+- Variables atómicas (id de emergencias y estadísticas)
+
+- Reserva todo-o-nada y backoff aleatorio (evitan deadlock y livelock)
+
+- Aging: la prioridad sube con el tiempo de espera (evita starvation)
+
+
+
+ Integrantes y contribución
+
+- (jose Daniel Novoa hernandez): (una sola persona)
 
